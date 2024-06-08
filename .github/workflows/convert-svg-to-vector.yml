@@ -1,0 +1,61 @@
+name: Convert SVG to Vector Drawable
+
+on: [push]
+
+jobs:
+  convert-svg:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Download Android SDK tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
+          mkdir -p $HOME/.android/cmdline-tools
+          unzip commandlinetools-linux-7302050_latest.zip -d $HOME/.android/cmdline-tools
+          yes | $HOME/.android/cmdline-tools/cmdline-tools/bin/sdkmanager --licenses
+          $HOME/.android/cmdline-tools/cmdline-tools/bin/sdkmanager "platform-tools" "build-tools;30.0.3"
+
+      - name: Convert SVG to Vector Drawable
+        run: |
+          mkdir -p res/drawable
+          for svg in icons/*.svg; do
+            filename=$(basename -- "$svg")
+            output_file="android/drawable/${filename%.svg}.xml"
+            android sdk build-tools/30.0.3/vector drawables "$svg" "$output_file"
+            if [ $? -ne 0 ]; then
+              echo "Conversion failed for $svg" >> conversion_failures.log
+            else
+              echo "Converted $svg to $output_file"
+            fi
+          done
+
+      - name: Upload artifacts
+        if: success() || failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: drawable-artifacts
+          path: |
+            res/drawable
+            conversion_failures.log
+
+      - name: Display conversion results
+        if: failure() || success()
+        run: |
+          if [ -f conversion_failures.log ]; then
+            echo "Some conversions failed. See conversion_failures.log for details."
+            cat conversion_failures.log
+            exit 1
+          else
+            echo "All SVG files converted successfully."
+          fi

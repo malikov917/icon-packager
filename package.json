@@ -1,0 +1,23 @@
+{
+  "name": "icon-packager",
+  "version": "1.0.0",
+  "description": "IconPackager is a comprehensive toolset for generating and publishing icon packages from SVG files for multiple platforms, including Web (npm), Android (Gradle/Maven), and iOS (CocoaPods).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malikov917/icon-packager.git"
+  },
+  "author": "Kanstanstin Malikau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/malikov917/icon-packager/issues"
+  },
+  "homepage": "https://github.com/malikov917/icon-packager#readme",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "svg2vectordrawable": "^2.9.1"
+  }
+}
