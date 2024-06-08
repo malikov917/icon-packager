@@ -1,3 +1,5 @@
+// packages/android-icons/build.gradle
+
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
@@ -21,9 +23,14 @@ publishing {
             from components.release
             groupId = 'com.kanstantsinmalikau'
             artifactId = 'android-icons'
-            version = '1.0.0'
+            version = '1.0.2'
         }
     }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
