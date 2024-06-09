@@ -1,5 +1,3 @@
-// packages/android-icons/build.gradle
-
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
@@ -23,7 +21,7 @@ publishing {
             from components.release
             groupId = 'com.kanstantsinmalikau'
             artifactId = 'android-icons'
-            version = '1.0.2'
+            version = '1.0.4'
         }
     }
 }

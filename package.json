@@ -4,7 +4,7 @@
   "description": "IconPackager is a comprehensive toolset for generating and publishing icon packages from SVG files for multiple platforms, including Web (npm), Android (Gradle/Maven), and iOS (CocoaPods).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:android": "node scripts/build-android.js"
   },
   "repository": {
     "type": "git",
