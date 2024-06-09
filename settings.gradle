@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'icon-packager'
-include('android')
+include ':android'
