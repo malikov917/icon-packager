@@ -1,3 +1,13 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.2' // You can use the latest stable version
+    }
+}
+
 plugins {
     id 'com.android.library'
     id 'maven-publish'
@@ -11,11 +21,6 @@ android {
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
-
-        // Prevent lint from breaking the build
-        lintOptions {
-            abortOnError false
-        }
     }
 
     buildTypes {

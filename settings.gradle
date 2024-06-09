@@ -1,1 +1,8 @@
 rootProject.name = 'icon-packager'
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
