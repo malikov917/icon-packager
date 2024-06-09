@@ -1,15 +1,1 @@
-// packages/android-icons/settings.gradle
-
-rootProject.name = 'android-icons'
-include ':packages:android-icons'
-
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
-    }
-}
-dependencies {
-    implementation 'com.github.User:Repo:Version'
-}
+rootProject.name = 'icon-packager'
