@@ -1,4 +1,3 @@
-rootProject.name = 'icon-packager'
 pluginManagement {
     repositories {
         google()
@@ -6,3 +5,5 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+rootProject.name = 'icon-packager'
