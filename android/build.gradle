@@ -8,7 +8,7 @@
 
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android' version '1.8.10'
+    id 'org.jetbrains.kotlin.android' version '1.9.0'
 }
 
 android {
@@ -16,15 +16,22 @@ android {
     compileSdkVersion 34
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdk 31
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 
@@ -34,9 +41,8 @@ repositories {
 }
 
 dependencies {
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api 'org.apache.commons:commons-math3:3.6.1'
-
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'com.android.tools.lint:lint-gradle:31.4.1'
+//    implementation 'androidx.appcompat:appcompat:1.6.1'
+//    implementation 'androidx.core:core-ctx:1.10.1'
+//    implementation group: 'com.google.android.material', name: 'material', version: '1.10.1'
 }

@@ -7,5 +7,22 @@
  * in the user manual at https://docs.gradle.org/8.0.2/userguide/multi_project_builds.html
  */
 
+pluginManagement {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        maven {
+            url 'https://jitpack.io'
+        }
+        gradlePluginPortal()
+    }
+}
+
 rootProject.name = 'icon-packager'
 include ':android'
