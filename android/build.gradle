@@ -4,11 +4,8 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'com.github.jitpack'
-version = '1.0'
-
 android {
-    namespace 'com.malikov917.iconpackager'
+    namespace 'com.github.malikov917.iconpackager'
     compileSdk 34
 
     defaultConfig {
@@ -44,8 +41,8 @@ afterEvaluate {
             // Creates a Maven publication called "release".
             release(MavenPublication) {
                 from components.release
-                groupId = 'com.github.jitpack'
-                artifactId = 'android-example'
+                groupId = 'com.github.malikov917'
+                artifactId = 'icon-packager'
                 version = '1.0'
             }
         }
