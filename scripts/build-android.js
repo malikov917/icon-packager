@@ -1,12 +1,16 @@
 const fs = require('fs');
 const fxExtra = require('fs-extra');
-const { convertFile } = require('svg2vectordrawable/src/svg-file-to-vectordrawable-file');
+const {convertFile} = require('svg2vectordrawable/src/svg-file-to-vectordrawable-file');
 const path = require('path');
 const iconsPath = '../icons-android';
 const outputPath = '../android/src/main/res/drawable';
 const srcDir = path.join(__dirname, iconsPath);
 const outputDir = path.join(__dirname, outputPath);
 
+/*
+  * This script is used to convert all SVG icons to Android VectorDrawable XML format.
+  * The script will read all SVG icons from the srcDir and convert them to VectorDrawable XML format.
+ */
 function buildAndroid() {
   fxExtra.mkdirpSync(outputDir, {});
   const icons = fs.readdirSync(srcDir);
