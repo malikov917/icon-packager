@@ -4,10 +4,12 @@
 name: Build Android Icons
 
 on:
+  workflow_dispatch:
+    types: [ requested ]
+    branches: [ main ]
   push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
+    branches:
+      - main
 
 jobs:
   build-android-icons:
