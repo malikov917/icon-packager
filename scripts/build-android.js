@@ -1,23 +1,35 @@
 const fs = require('fs');
 const fxExtra = require('fs-extra');
-const svg2vectordrawable = require('svg2vectordrawable/src/svg-file-to-vectordrawable-file');
+const { convertFile } = require('svg2vectordrawable/src/svg-file-to-vectordrawable-file');
 const path = require('path');
-const iconsPath = '../icons';
-const outputPath = '../packages/android-icons';
+const iconsPath = '../icons-android';
+const outputPath = '../android/src/main/res/drawable';
+const srcDir = path.join(__dirname, iconsPath);
+const outputDir = path.join(__dirname, outputPath);
 
 function buildAndroid() {
-  const srcDir = path.join(__dirname, iconsPath);
-  const outputDir = path.join(__dirname, outputPath);
+  fxExtra.mkdirpSync(outputDir, {});
+  const icons = fs.readdirSync(srcDir);
+  convertIcons(icons, srcDir, outputDir);
+}
 
-  const files = fs.readdirSync(srcDir);
-  fxExtra.mkdirpSync(outputDir);
-  files.forEach(icon => {
-    if (icon.endsWith('.svg')) {
-      const iconPath = path.join(srcDir, icon);
-      const iconOutputPath = path.join(outputDir, icon.replace('.svg', '.xml'));
-      svg2vectordrawable.convertFile(iconPath, iconOutputPath, {});
-    }
+function convertIcons(icons, srcDir, outputDir) {
+  icons.forEach(icon => {
+    if (!icon.endsWith('.svg')) return;
+    const iconPath = path.join(srcDir, icon);
+    const iconOutputName = prepareIconName(icon);
+    const iconOutputPath = path.join(outputDir, iconOutputName);
+    convertFile(iconPath, iconOutputPath, {});
   });
+}
+
+function prepareIconName(icon) {
+  return icon
+      .toLowerCase()
+      .trim()
+      .replaceAll(/ /g, '_')
+      .replaceAll(/-/g, '_')
+      .replace('.svg', '.xml');
 }
 
 buildAndroid();
